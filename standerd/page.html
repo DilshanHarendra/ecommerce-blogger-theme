@@ -3,8 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="p-2">
+      <p class="text-center text-3xl font-semibold mb-3 mt-5">Title</p>
+      <div class="container mx-auto ">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus deleniti dolorem dolorum eos id incidunt, laudantium, magnam maxime molestiae perferendis perspiciatis placeat quae quam rem repellendus reprehenderit, similique suscipit unde.
+      </div>
+    </div>
 
+
+    <script>
+      const getPage=()=&gt;{
+        return{
+        title:&#39;&#39;,
+        description:&#39;&#39;,
+        init(){
+          const element = document.querySelector(&#39;.post-outer&#39;);
+
+          const h3 = element.querySelector(&#39;.post-title.entry-title&#39;);
+          const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
+          const title =h3.innerHTML
+
+
+          const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
+          content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
+          content.querySelectorAll(&quot;p&quot;).forEach(p =&gt;{
+            const data=p.innerHTML.toString();
+            if (data.toLowerCase().includes(&quot;price_symbol&quot;)){
+            p.remove()
+          }else if (data.toLowerCase().includes(&quot;price&quot;)){
+            p.remove()
+          }else if (data.toLowerCase().includes(&quot;whatsapp&quot;)){
+            p.remove()
+          }
+        });
+          description=content.innerHTML;
+
+          this.title=title;
+          this.description =description;
+        }
+      }
+    </script>
 </body>
 </html>
