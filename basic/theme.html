@@ -19,7 +19,6 @@
   <meta content='en_US' property='og:locale'/>
   <meta content='product' property='og:type'/>
   <meta expr:content='data:blog.title' property='og:title'/>
-  <meta expr:content='data:blog.description' property='og:description'/>
   <meta expr:content='data:blog.url' property='og:url'/>
   <meta expr:content='data:blog.title' property='og:site_name'/>
   <meta content='' property='og:image'/>
@@ -662,9 +661,9 @@
       <b:template-script inline='true' name='threaded_comments'/>
       <script type='text/javascript'>
         blogger.widgets.blog.initThreadedComments(
-          <data:post.commentJso/>,
-          <data:post.commentMsgs/>,
-          <data:post.commentConfig/>);
+                <data:post.commentJso/>,
+                <data:post.commentMsgs/>,
+                <data:post.commentConfig/>);
       </script>
     </b:includable>
     <b:includable id='threadedComments' var='post'>
@@ -873,10 +872,7 @@
   </section>
 </b:if>
 
-
-<b:if cond='data:blog.pageType == &quot;item&quot;'>
-
-
+<b:if cond='data:blog.pageType != &quot;index&quot;'>
 
   <b:section id='productHeader-container'>
     <b:widget id='Header2' locked='false' title='Product Catalog (Header)' type='Header' version='1'>
@@ -890,50 +886,49 @@
         <b:widget-setting name='displayWidth'>0</b:widget-setting>
       </b:widget-settings>
       <b:includable id='main'>
-        <nav class='fixed w-full top-0 z-20 bg-gray-900 backdrop-blur-md' id='navbar'>
-          <div class='container mx-auto px-6 py-4 flex justify-between items-center '>
-            <a class='font-bold text-2xl text-white' href='/'><data:title/></a>
-
+        <nav class='fixed w-full top-0 z-20 bg-gray-900 backdrop-blur-md ' id='navbar'>
+          <div class='container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center '>
+            <div class='flex justify-between w-full md:w-fit'>
+              <a class='font-bold text-2xl text-white' href='/'><data:title/></a>
+              <button class='text-white md:hidden hover:opacity-75' id='headerBtn'>
+                <svg class='w-5 h-54' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5' stroke-linecap='round' stroke-linejoin='round'/>
+                </svg>
+              </button>
+            </div>
+            <div class='hidden md:flex space-x-4  flex-row '>
+              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
+              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
+            </div>
           </div>
+
+          <aside class='fixed inset-y-0 z-20 flex-shrink-0 w-full mt-16 pt-5 overflow-y-auto bg-gray-900 md:hidden z-50 h-screen' x-data='' x-show='$store.navBar.isHeaderOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform -translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform -translate-x-20' x-transition:leave-start='opacity-100'>
+            <div class='flex space-y-4  flex-col px-6'>
+              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
+              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
+            </div>
+          </aside>
         </nav>
 
-      </b:includable>
-      <b:includable id='behindImageStyle'>
-        <b:if cond='data:sourceUrl'>
-          <b:include cond='data:this.image' data='{                    image: data:this.image,                    selector: &quot;.header-widget&quot;                  }' name='responsiveImageStyle'/>
-          <style type='text/css'>
-              .header-widget {
-                  background-position: <data:blog.locale.languageAlignment/>;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-              }
-          </style>
-        </b:if>
+
+
+
       </b:includable>
       <b:includable id='description'>
-        <p>
-          <data:this.description/>
-        </p>
-      </b:includable>
-      <b:includable id='image'>
-        <a class='header-image-wrapper' expr:href='data:blog.homepageUrl'>
-          <b:include data='{                                                 image: data:image,                                                 altText: data:blog.title.escaped,                                                 originalWidth: data:width,                                                 originalHeight: data:height                                               }' name='responsiveImage'/>
-        </a>
+        <div class='descriptionwrapper'>
+          <p class='description'><span><data:description/></span></p>
+        </div>
       </b:includable>
       <b:includable id='title'>
-        <h1>
-          <b:tag cond='data:view.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
-            <data:title/>
-          </b:tag>
-        </h1>
+        <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
+          <data:title/>
+        </b:tag>
       </b:includable>
     </b:widget>
   </b:section>
+</b:if>
 
-
-
-
-
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
 
   <section class='mt-24 container mx-auto mb-8 p-5'>
     <div class='flex items-center justify-start space-x-1 mb-8 text-xs font-semibold'>
@@ -974,6 +969,8 @@
         <p class='font-bold  text-2xl md:block hidden' x-html='product.title'> </p>
 
         <p class='mt-3 md:mt-8 text-lg font-semibold' x-html='product.priceDisplay'/>
+
+
         <template x-if='product.action'>
           <a :href='product.action' class='border p-1 hover:opacity-75 rounded-md text-white text-sm font-semibold px-4 mt-4 shadow block w-fit' style='background-color: var(--primary-color)' target='_blank'>
             Buy Now
@@ -989,27 +986,47 @@
 </b:if>
 
 
+<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+
+  <div class='p-2 mt-24' x-data='getPage()'>
+    <p class='text-center text-3xl font-semibold mb-3' x-html='title'/>
+    <div class='container mx-auto py-5' x-html='description'>
+    </div>
+  </div>
+
+</b:if>
 
 
 <!-- Footer -->
 <footer class='bg-gray-900 py-8' x-data='getFooter()'>
-  <div class='container mx-auto px-6 text-center text-gray-400 flex items-center justify-between'>
-    <div class='flex space-x-4 justify-start w-fit'>
-      <template x-if='meta.socialMeda.facebook'>
-        <a :href='meta.socialMeda.facebook' class='text-gray-500 hover:text-blue-600 ' target='_blank'>
-          <i class='fab fa-facebook-f text-xl'/>
-        </a>
-      </template>
-      <template x-if='meta.socialMeda.instagram'>
-        <a :href='meta.socialMeda.instagram' class='text-gray-500 hover:text-blue-600 ' target='_blank'>
-          <i class='fab fa-instagram text-xl'/>
-        </a>
-      </template>
-      <template x-if='meta.socialMeda.tiktok'>
-        <a :href='meta.socialMeda.tiktok' class='text-gray-500 hover:text-blue-600 ' target='_blank'>
-          <i class='fab fa-tiktok text-xl'/>
-        </a>
-      </template>
+  <div class='container mx-auto px-6 text-center text-gray-400 flex items-start justify-between'>
+    <div>
+      <p class='font-bold text-lg tracking-wider text-gray-200'>Follow us on</p>
+      <div class='flex space-x-4 justify-start w-fit mt-2'>
+        <template x-if='meta.socialMeda.facebook'>
+          <a :href='meta.socialMeda.facebook' class='text-gray-500 hover:opacity-75' target='_blank'>
+            <i class='fab fa-facebook-f text-xl'/>
+          </a>
+        </template>
+        <template x-if='meta.socialMeda.instagram'>
+          <a :href='meta.socialMeda.instagram' class='text-gray-500 hover:opacity-75' target='_blank'>
+            <i class='fab fa-instagram text-xl'/>
+          </a>
+        </template>
+        <template x-if='meta.socialMeda.tiktok'>
+          <a :href='meta.socialMeda.tiktok' class='text-gray-500 hover:opacity-75 ' target='_blank'>
+            <i class='fab fa-tiktok text-xl'/>
+          </a>
+        </template>
+      </div>
+    </div>
+    <div>
+      <p class='font-bold text-lg tracking-wider text-gray-200'>Customer Service</p>
+      <div class='flex space-y-1 items-start  flex-col mt-2 ml-2'>
+        <a class='hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
+        <a class='hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
+
+      </div>
     </div>
     <p>2024 Dilshan. All Rights Reserved.</p>
   </div>
@@ -1024,6 +1041,19 @@
     return txt.replace(/&amp;[a-zA-Z0-9#]+;/g, &#39;&#39;)
   };
 
+  document.addEventListener(&#39;alpine:init&#39;,()=&gt;{
+    Alpine.store(&#39;navBar&#39;,{
+      isHeaderOpen:false,
+              openCloseHeader(){
+        this.isHeaderOpen =  !this.isHeaderOpen
+      },
+    });
+  })
+
+
+  document.getElementById(&quot;headerBtn&quot;)?.addEventListener(&quot;click&quot;,()=&gt;{
+    Alpine.store(&#39;navBar&#39;).openCloseHeader()
+  })
 
   const getProducts=()=&gt;{
     return {
@@ -1039,7 +1069,7 @@
       let description=&quot;&quot;;
       elements.forEach((element) =&gt; {
         const imgs = element.querySelectorAll(
-          &#39;.post-body.entry-content img&#39;
+                &#39;.post-body.entry-content img&#39;
     );
       const a = element.querySelector(&#39;.post-title.entry-title a&#39;);
       const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
@@ -1111,7 +1141,7 @@
 
       const title =a?.innerHTML || &#39;&#39;;
       const imgs = element.querySelectorAll(
-        &#39;.post-body.entry-content img&#39;
+              &#39;.post-body.entry-content img&#39;
     );
       if(title.toString().toLowerCase() ==&#39;meta&#39;){
 
@@ -1182,8 +1212,8 @@
   });
   var swiper2 = new Swiper(&quot;.mySwiper2&quot;, {
     loop: true,
-      spaceBetween: 10,
-      navigation: {
+            spaceBetween: 10,
+            navigation: {
       nextEl: &quot;.swiper-button-next&quot;,
       prevEl: &quot;.swiper-button-prev&quot;,
     },
@@ -1214,12 +1244,13 @@
       let description=&quot;&quot;;
       let action=&quot;&quot;;
       const imgs = element.querySelectorAll(
-        &#39;.post-body.entry-content img&#39;
+              &#39;.post-body.entry-content img&#39;
     );
       const h3 = element.querySelector(&#39;.post-title.entry-title&#39;);
       const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
       const timeStamp = element.querySelector(&#39;.published&#39;).innerHTML.toString().trim();
       const title =h3.innerHTML
+
 
 
       p.forEach(item=&gt;{
@@ -1251,22 +1282,39 @@
       description=content.innerHTML;
 
       const imageMetaTag=document.querySelector(&#39;meta[property=&quot;og:image&quot;]&#39;);
-      const descriptionMetaTag=document.querySelector(&#39;meta[property=&quot;og:description&quot;]&#39;);
       imageMetaTag.setAttribute(&#39;content&#39;,imgs[0].src);
-      descriptionMetaTag.setAttribute(&#39;content&#39;,title);
+
+
       this.product={
         action: action,
         images: [...imgs].map(img=&gt;img.src),
-      title,
-        price:price,
-        priceDisplay: `${priceSymbol} ${price}`,
-        priceSymbol:priceSymbol,
-        description,
-        timeStamp
+              title,
+              price:price,
+              priceDisplay: `${priceSymbol} ${price}`,
+              priceSymbol:priceSymbol,
+              description,
+              timeStamp
     }
     },
   }
   }
+
+  const getPage=()=&gt;{
+    return{
+      title:&quot;&quot;,
+    description:&quot;&quot;,
+    init(){
+      const element = document.querySelector(&quot;.post-outer&quot;);
+      const h3 = element.querySelector(&quot;.post-title.entry-title&quot;);
+      const title =h3.innerHTML
+      const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
+      content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
+      this.title=title;
+      this.description =content.innerHTML;
+    }
+  }
+  }
+
 </script>
 </body>
 </html>
