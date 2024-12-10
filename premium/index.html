@@ -955,7 +955,7 @@ Post a Comment
                 </div>
                 <div class='grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
                     <template x-for='product in products'>
-                        <a :href='product.link' class='border rounded-md bg-white shadow-md hover:scale-105 duration-300'>
+                        <a :href='product.link' class='border rounded-md bg-white shadow-md hover:scale-105 duration-300 relative'>
                             <img :alt='product.title' :src='product.image' class='w-full object-cover h-72 rounded-t-md'/>
                             <div class='py-4 px-2'>
                                 <p class='line-clamp-2 text-sm font-bold text-gray-500 h-10' x-text='product.title'></p>
@@ -963,6 +963,7 @@ Post a Comment
                                     <p class='font-semibold  text-lg' x-text='product.price'></p>
                                     <span class='text-xs text-gray-500' x-text='product.priceSymbol'></span>
                                 </div>
+
                             </div>
                         </a>
                     </template>
@@ -1004,6 +1005,69 @@ Post a Comment
         <p>2024 Dilshan. All Rights Reserved.</p>
     </div>
 </footer>
+
+<button id="cart" class=' fixed left-5  bottom-5 p-2 cursor-pointer z-50 bg-white rounded-full shadow hover:opacity-50' >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class='w-10 h-10 '>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+    </svg>
+</button>
+
+<aside
+        x-data=''
+        class="fixed inset-y-0 right-0 z-50 flex-shrink-0 w-full md:w-1/4  bg-white p-1"
+        x-show="$store.cart.isOpen"
+        x-transition:enter="transition ease-in-out duration-150"
+        x-transition:enter-start="opacity-0 transform translate-x-20"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in-out duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0 transform translate-x-20"
+>
+<button id="cart-close" class="rounded-full bg-gray-200 p-1 absolute top-2 right-2 hover:opacity-75">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+
+</button>
+
+    <h2 class="text-2xl uppercase font-bold px-3 mt-4">Cart</h2>
+
+    <div style="height: 80vh" class="flex flex-col mt-4  overflow-y-auto">
+        <template  x-data='' x-for="(item,index) in $store.cart.items">
+            <div :key="index" class="flex space-x-2 p-2 relative mb-2">
+                <button  :data-index="index" class="absolute top-0 left-2 rounded-full shadow bg-gray-100 text-red-500 border cart-item-close-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <img style="min-width: 80px" class="w-20 h-20 object-cover rounded-md" src="https://gflock.lk/cdn/shop/files/10_dd68d38f-3c6c-4d96-9b48-b51f45deadb4_2000x.jpg?v=1733425659" alt="">
+                <div>
+                    <p class="font-semibold line-clamp-1" x-html="item.product.title"></p>
+                    <p class="text-gray-600 text-sm" x-html="item.product.price"></p>
+                    <div class="w-full flex items-center space-x-4 mt-2">
+                        <button :data-index="index"  class="border rounded-md bg-gray-200 hover:opacity-75 p-1 qty-reduce-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                            </svg>
+                        </button>
+                        <input type="number" :data-index="index" min="0" x-model="item.qty" class="border py-1 px-2 w-20 qty-input">
+                        <button :data-index="index" class="border rounded-md bg-gray-200 hover:opacity-75 p-1 qty-increase-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <button style="background-color: var(--primary-color);" class="w-10/12 mx-auto block rounded-md hover:opacity-75 text-xl font-semibold text-white py-2">
+        Checkout
+    </button>
+
+</aside>
+
 <script>
     const items = [];
 
@@ -1019,12 +1083,86 @@ Post a Comment
                 this.isHeaderOpen =  !this.isHeaderOpen
             },
         });
+
+        Alpine.store('cart',{
+            items:[],
+            isOpen:false,
+            init(){
+              const data = localStorage.getItem("cart")
+              if (data){
+                  const jsonData = JSON.parse(data)
+                  this.items = [...jsonData]
+              }
+            },
+            openCloseCart(){
+                this.isOpen =  !this.isOpen
+            },
+            removeItem(index){
+                this.items.splice(index,1)
+            },
+            increaseQty(index){
+                this.items[index].qty++
+            },
+            reduceQty(index){
+                let  qty =this.items[index].qty
+                qty--
+                if (qty<1){
+                    qty = 1
+                }
+                this.items[index].qty=qty
+            },
+            setQty(index,qty){
+                if (qty>0){
+                    this.items[index].qty = qty
+                }
+                this.items[index].qty=1
+            },
+        });
+
+        Alpine.effect(() => {
+            localStorage.setItem("cart",JSON.stringify(Alpine.store('cart').items))
+        });
     })
 
-
+    document.getElementById("cart")?.addEventListener("click",()=>{
+        Alpine.store('cart').openCloseCart()
+    })
+    document.getElementById("cart-close")?.addEventListener("click",()=>{
+        Alpine.store('cart').openCloseCart()
+    })
     document.getElementById("headerBtn")?.addEventListener("click",()=>{
         Alpine.store('navBar').openCloseHeader()
     })
+
+setTimeout(()=>{
+    document.querySelectorAll(".cart-item-close-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const index = btn.getAttribute("data-index")
+            Alpine.store('cart').removeItem(index)
+        })
+    })
+    document.querySelectorAll(".qty-increase-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const index = btn.getAttribute("data-index")
+            Alpine.store('cart').increaseQty(index)
+        })
+    })
+    document.querySelectorAll(".qty-reduce-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const index = btn.getAttribute("data-index")
+            Alpine.store('cart').reduceQty(index)
+        })
+    })
+    document.querySelectorAll(".qty-input").forEach(input=>{
+        input.addEventListener("change",(e)=>{
+            const index = input.getAttribute("data-index")
+            Alpine.store('cart').setQty(index,e.target.value)
+        })
+    })
+
+
+
+},500)
 
     const getProducts=()=>{
         return {
@@ -1203,10 +1341,23 @@ Post a Comment
             },
         });
 
+        const getSlidesPerView=()=>{
+            if (window.innerWidth<450){
+                return 1
+            }else if (window.innerWidth < 980 ){
+                return 3
+            }else {
+                return 4
+            }
+        }
 
         var swiper = new Swiper(".new-products", {
-            slidesPerView: 4,
+            slidesPerView: getSlidesPerView(),
             spaceBetween: 20,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
