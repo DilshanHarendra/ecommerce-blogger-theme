@@ -54,7 +54,7 @@
     }
 
     --></style>
-    <link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=163c3954-10d0-4ec2-8c82-2723eda67655' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=163c3954-10d0-4ec2-8c82-2723eda67655' rel='stylesheet'/></noscript>
+    <link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=9418c99a-c6ef-4ee4-b595-51b4b16c20a3' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=9418c99a-c6ef-4ee4-b595-51b4b16c20a3' rel='stylesheet'/></noscript>
     <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
     <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 
@@ -135,7 +135,7 @@ Posted by
         <div class='container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center '>
             <div class='flex justify-between w-full md:w-fit'>
                 <a class='font-bold text-2xl text-white' href='/'>Product Catalog</a>
-                <button class='text-white md:hidden hover:opacity-75' id='headerBtn'>
+                <button class='text-white md:hidden hover:opacity-75' x-bind='headerBtn' x-data=''>
                     <svg class='w-5 h-54' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
                         <path d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5' stroke-linecap='round' stroke-linejoin='round'></path>
                     </svg>
@@ -192,6 +192,58 @@ Posted by
         <p>2024 Dilshan. All Rights Reserved.</p>
     </div>
 </footer>
+<button class=' fixed left-5  bottom-5 p-2 cursor-pointer z-50 bg-white rounded-full shadow hover:opacity-50' x-bind='openCloseCartBtn' x-data=''>
+    <svg class='w-10 h-10 ' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z' stroke-linecap='round' stroke-linejoin='round'></path>
+    </svg>
+</button>
+<div class='fixed inset-0 z-50 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center' x-data='' x-show='$store.cart.isOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0' x-transition:leave-start='opacity-100'></div>
+<aside class='fixed inset-y-0 right-0 z-50 flex-shrink-0 w-full md:w-2/5   bg-white p-1' x-bind='cart' x-data='' x-show='$store.cart.isOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform translate-x-20' x-transition:leave-start='opacity-100'>
+    <button class='rounded-full bg-gray-200 p-1 absolute top-2 right-2 hover:opacity-75' x-bind='openCloseCartBtn'>
+        <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M6 18 18 6M6 6l12 12' stroke-linecap='round' stroke-linejoin='round'></path>
+        </svg>
+    </button>
+    <h2 class='text-2xl uppercase font-bold px-3 mt-4'>Cart</h2>
+    <div class='flex flex-col mt-4  overflow-y-auto' style='height: 72vh'>
+        <template x-data='' x-for='(item,index) in $store.cart.items'>
+            <div :key='index' class='flex space-x-2 p-2 relative mb-2'>
+                <button class='absolute top-0 left-2 rounded-full shadow bg-gray-100 text-red-500 border' x-bind='itemRemoveBtn'>
+                    <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                        <path d='M6 18 18 6M6 6l12 12' stroke-linecap='round' stroke-linejoin='round'></path>
+                    </svg>
+                </button>
+                <img :alt='item.product.title' :src='item.product.img' class='w-20 h-20 object-cover rounded-md' style='min-width: 80px'/>
+                <div>
+                    <p class='font-semibold line-clamp-1' x-html='item.product.title'></p>
+                    <p class='text-gray-600 text-sm' x-html='item.product.priceDisplay'></p>
+                    <div class='w-full flex items-center space-x-4 mt-2'>
+                        <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='qtyReduceBtn'>
+                            <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                                <path d='M5 12h14' stroke-linecap='round' stroke-linejoin='round'></path>
+                            </svg>
+                        </button>
+                        <input class='border py-1 px-2 w-20 qty-input' min='0' type='number' x-bind='qtyInput' x-model='item.qty'/>
+                        <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='qtyIncreaseBtn'>
+                            <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                                <path d='M12 4.5v15m7.5-7.5h-15' stroke-linecap='round' stroke-linejoin='round'></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class='border-t pt-5'>
+        <div class='flex justify-between items-center space-x-2 mb-8 px-10'>
+            <p class='text-2xl font-bold'>Total</p>
+            <p class='text-2xl font-bold' x-data='' x-html='$store.cart.total'></p>
+        </div>
+        <button :disabled='$store.cart.items.length==0' class='w-10/12 mx-auto block rounded-md disabled:cursor-not-allowed  hover:opacity-75 text-xl font-semibold text-white py-2' style='background-color: var(--primary-color);' x-bind='checkoutBtn' x-data=''>
+            Checkout
+        </button>
+    </div>
+</aside>
 <script>
     const items = [];
 
@@ -207,12 +259,181 @@ Posted by
                 this.isHeaderOpen =  !this.isHeaderOpen
             },
         });
+
+
+        Alpine.store('cart',{
+            items:[],
+            item:{
+                title:'',
+                price:'',
+                img:'',
+                qty:1,
+                link:''
+            },
+            total:'0',
+            isOpen:false,
+            init(){
+                const data = localStorage.getItem("cart")
+                if (data){
+                    const jsonData = JSON.parse(data)
+                    this.items = [...jsonData]
+                }
+            },
+            openCloseCart(){
+                this.isOpen =  !this.isOpen
+            },
+            removeItem(index){
+                this.items.splice(index,1)
+            },
+            increaseQty(index){
+                this.items[index].qty++
+            },
+            reduceQty(index){
+                let  qty =this.items[index].qty
+                qty--
+                if (qty<1){
+                    qty = 1
+                }
+                this.items[index].qty=qty
+            },
+            setQty(index,qty){
+                const quantity=parseInt(qty)
+                if (quantity>0){
+                    this.items[index].qty = quantity
+                }else {
+                    this.items[index].qty=1
+                }
+
+            },
+            setTotal(total){
+                this.total = total
+            },
+            setItem(item){
+                this.item = {...item,qty: 1}
+            },
+            increaseItemQty(){
+                this.item.qty++
+            },
+            reduceItemQty(){
+                let qty = this.item.qty
+
+                qty--
+                if (qty<1){
+                    qty = 1
+                }
+                this.item.qty = qty
+            },
+            setItemQty(qty){
+                const quantity=parseInt(qty)
+                if (quantity>0){
+                    this.item.qty = quantity
+                }else {
+                    this.item.qty=1
+                }
+            },
+            addToCart(){
+                const index = this.items.findIndex(item=>item.product.link == this.item.link)
+                if (index>-1){
+                    this.items[index].qty = parseInt(this.items[index].qty) + parseInt(this.item.qty)
+                }else {
+                    const data = {...this.item};
+                    delete data.qty
+                    this.items.push({
+                        product:{...data},
+                        qty:this.item.qty
+                    })
+                }
+                this.isOpen =  true
+                this.item.qty = 1
+            }
+        });
+
+
+        Alpine.effect(() => {
+            const items = Alpine.store('cart').items
+            if (items.length>0){
+                const symBol = items[0].product.priceSymbol;
+                let price=0
+                items.forEach(item=>{
+                    price = price + (item.qty * parseFloat(item.product.price))
+                })
+
+                Alpine.store('cart').setTotal(`${symBol} ${price}`);
+            }else {
+                Alpine.store('cart').setTotal(`0`);
+            }
+
+            localStorage.setItem("cart",JSON.stringify(items));
+        });
+
+        Alpine.bind('qtyIncreaseBtn', () => ({
+            '@click': `Alpine.store('cart').increaseQty(index)`,
+        }))
+        Alpine.bind('qtyReduceBtn', () => ({
+            '@click': `Alpine.store('cart').reduceQty(index)`,
+        }))
+        Alpine.bind('qtyInput', () => ({
+            '@blur': `Alpine.store('cart').setQty(index,item.qty)`,
+        }))
+        Alpine.bind('itemRemoveBtn', () => ({
+            '@click': `Alpine.store('cart').removeItem(index)`,
+        }))
+        Alpine.bind('openCloseCartBtn', () => ({
+            '@click': `Alpine.store('cart').openCloseCart()`,
+        }))
+
+
+        Alpine.bind('increaseItemQty', () => ({
+            '@click': `Alpine.store('cart').increaseItemQty()`,
+        }))
+        Alpine.bind('reduceItemQty', () => ({
+            '@click': `Alpine.store('cart').reduceItemQty()`,
+        }))
+        Alpine.bind('qtyItemInput', () => ({
+            '@blur': `Alpine.store('cart').setItemQty($store.cart.item.qty)`,
+        }))
+
+
+
+        Alpine.bind('addToCart', () => ({
+            '@click': `Alpine.store('cart').addToCart()`,
+        }))
+
+        Alpine.bind('cart', () => ({
+            '@click.away': `Alpine.store('cart').openCloseCart()`,
+            '@keydown.escape': `Alpine.store('cart').openCloseCart()`,
+        }))
+
+        Alpine.bind('checkoutBtn', () => ({
+            '@click'(){
+                const data = localStorage.getItem("cart")
+                if (data){
+                    const items =JSON.parse(data);
+                    let message = "Order\n\n\n";
+                    let whatsapp = "";
+                    items.forEach((item,index)=>{
+                        if (!whatsapp){
+                            whatsapp = item.product.whatsapp
+                        }
+                        message+=`Item ${index+1} \n\n`
+                        message+=`Item name : ${item.product.title.toString().trim()}\n`
+                        message+=`Quantity : ${item.qty}\n`
+                        message+=`Item Link: ${item.product.link.toString().trim()}\n`
+                        message+=`\n\n\n`
+                    })
+                    const action=`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+                    window.open(action, "_blank");
+                }
+            },
+        }))
+
+
+        Alpine.bind('headerBtn', () => ({
+            '@click': `Alpine.store('navBar').openCloseHeader()`,
+        }))
     })
 
 
-    document.getElementById("headerBtn")?.addEventListener("click",()=>{
-        Alpine.store('navBar').openCloseHeader()
-    })
 
     const getProducts=()=>{
         return {
@@ -427,6 +648,7 @@ Posted by
                 let priceSymbol="";
                 let description="";
                 let action="";
+                let whatsapp="";
                 const imgs = element.querySelectorAll(
                     '.post-body.entry-content img'
                 );
@@ -445,7 +667,7 @@ Posted by
                     }else if (content.toLowerCase().includes("price")){
                         price=content.split(":")[1].trim();
                     }else if (content.toLowerCase().includes("whatsapp")){
-                        const whatsapp=removeUnicode(content.split(":")[1].trim());
+                        whatsapp=removeUnicode(content.split(":")[1].trim());
                         const message=encodeURIComponent('Hi I like to know more info\n');
                         action=`https://wa.me/${whatsapp}?text=${message} ${window.location.href} `;
 
@@ -463,6 +685,7 @@ Posted by
 
                 const content=element.querySelector(".post-body.entry-content.float-container");
                 content.querySelectorAll("img").forEach(img => img.remove());
+                content.querySelectorAll(".separator").forEach(item => item.remove());
                 content.querySelectorAll("p").forEach(p =>{
                     const data=p.innerHTML.toString()
                     if (data.toLowerCase().includes("price_symbol")){
@@ -470,6 +693,8 @@ Posted by
                     }else if (data.toLowerCase().includes("price")){
                         p.remove()
                     }else if (data.toLowerCase().includes("whatsapp")){
+                        p.remove()
+                    }else if (p.children.length == 1 && p.children[0].tagName == 'BR'){
                         p.remove()
                     }
                 });
@@ -490,6 +715,18 @@ Posted by
                     description,
                     timeStamp
                 }
+
+                Alpine.store('cart').setItem({
+                    whatsapp,
+                    title,
+                    img:imgs[0].src,
+                    priceDisplay:`${priceSymbol} ${price}`,
+                    priceSymbol:priceSymbol,
+                    price:price,
+                    qty:1,
+                    link:window.location.href
+                })
+
             },
         }
     }
@@ -514,11 +751,11 @@ Posted by
 
 <script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/3704019819-widgets.js"></script>
 <script type='text/javascript'>
-    window['__wavt'] = 'AOuZoY6BxziJdqEuvJMG1ezDKPYLFDDawQ:1733774867131';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d5963326103498819871','//d-product-catalog.blogspot.com/p/terms-and-conditions.html','5963326103498819871');
-    _WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '5963326103498819871', 'title': 'Product Catalog', 'url': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'canonicalUrl': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'homepageUrl': 'https://d-product-catalog.blogspot.com/', 'searchUrl': 'https://d-product-catalog.blogspot.com/search', 'canonicalHomepageUrl': 'https://d-product-catalog.blogspot.com/', 'blogspotFaviconUrl': 'https://d-product-catalog.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Product Catalog - RSS\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/5963326103498819871/posts/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/36eb93a0ea1bb211', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'static_page', 'pageId': '5844322387835904293', 'pageName': 'Terms and Conditions', 'pageTitle': 'Product Catalog: Terms and Conditions', 'metaDescription': 'This is a tos'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Terms and Conditions', 'description': 'This is a tos', 'url': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': true, 'isPost': false, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'pageId': 5844322387835904293}}, {'name': 'widgets', 'data': [{'title': 'Blog Posts', 'type': 'Blog', 'sectionId': 'products', 'id': 'Blog1', 'posts': [{'id': '5844322387835904293', 'title': 'Terms and Conditions', 'showInlineAds': false}], 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': 'Labels:'}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Location:'}]}], 'allBylineItems': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': 'Labels:'}, {'name': 'location', 'label': 'Location:'}]}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'header-container', 'id': 'Header1'}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'productHeader-container', 'id': 'Header2'}]}]);
+    window['__wavt'] = 'AOuZoY6zSxkLpcHIN7evA791dGH3ZEy2ZQ:1733953699548';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d5963326103498819871','//d-product-catalog.blogspot.com/p/terms-and-conditions.html','5963326103498819871');
+    _WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '5963326103498819871', 'title': 'Product Catalog', 'url': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'canonicalUrl': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'homepageUrl': 'https://d-product-catalog.blogspot.com/', 'searchUrl': 'https://d-product-catalog.blogspot.com/search', 'canonicalHomepageUrl': 'https://d-product-catalog.blogspot.com/', 'blogspotFaviconUrl': 'https://d-product-catalog.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Product Catalog - RSS\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/5963326103498819871/posts/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/64fba25a9e2c60bd', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'static_page', 'pageId': '5844322387835904293', 'pageName': 'Terms and Conditions', 'pageTitle': 'Product Catalog: Terms and Conditions', 'metaDescription': 'This is a tos'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Terms and Conditions', 'description': 'This is a tos', 'url': 'https://d-product-catalog.blogspot.com/p/terms-and-conditions.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': true, 'isPost': false, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'pageId': 5844322387835904293}}, {'name': 'widgets', 'data': [{'title': 'Blog Posts', 'type': 'Blog', 'sectionId': 'products', 'id': 'Blog1', 'posts': [{'id': '5844322387835904293', 'title': 'Terms and Conditions', 'showInlineAds': false}], 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': 'Labels:'}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Location:'}]}], 'allBylineItems': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': 'Labels:'}, {'name': 'location', 'label': 'Location:'}]}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'productHeader-container', 'id': 'Header2'}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'header-container', 'id': 'Header1'}]}]);
     _WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'products', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/2385764300-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/1964470060-lightbox_bundle.css'}, 'displayModeFull'));
-    _WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header-container', document.getElementById('Header1'), {}, 'displayModeFull'));
     _WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header2', 'productHeader-container', document.getElementById('Header2'), {}, 'displayModeFull'));
+    _WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header-container', document.getElementById('Header1'), {}, 'displayModeFull'));
 </script>
 </body>
 </html>

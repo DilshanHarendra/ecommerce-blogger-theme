@@ -707,6 +707,59 @@
   </b:widget>
 </b:section>
 
+<b:section id='productHeader-container'>
+  <b:widget id='Header2' locked='false' title='Product Catalog (Header)' type='Header' version='1'>
+    <b:widget-settings>
+      <b:widget-setting name='displayUrl'/>
+      <b:widget-setting name='displayHeight'>0</b:widget-setting>
+      <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
+      <b:widget-setting name='useImage'>false</b:widget-setting>
+      <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+      <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+      <b:widget-setting name='displayWidth'>0</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+      <nav class='fixed w-full top-0 z-20 bg-gray-900 backdrop-blur-md ' id='navbar'>
+        <div class='container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center '>
+          <div class='flex justify-between w-full md:w-fit'>
+            <a class='font-bold text-2xl text-white' href='/'><data:title/></a>
+            <button class='text-white md:hidden hover:opacity-75' x-bind='headerBtn' x-data=''>
+              <svg class='w-5 h-54' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5' stroke-linecap='round' stroke-linejoin='round'/>
+              </svg>
+            </button>
+          </div>
+          <div class='hidden md:flex space-x-4  flex-row '>
+            <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
+            <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
+          </div>
+        </div>
+
+        <aside class='fixed inset-y-0 z-20 flex-shrink-0 w-full mt-16 pt-5 overflow-y-auto bg-gray-900 md:hidden z-50 h-screen' x-data='' x-show='$store.navBar.isHeaderOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform -translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform -translate-x-20' x-transition:leave-start='opacity-100'>
+          <div class='flex space-y-4  flex-col px-6'>
+            <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
+            <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
+          </div>
+        </aside>
+      </nav>
+
+
+
+
+    </b:includable>
+    <b:includable id='description'>
+      <div class='descriptionwrapper'>
+        <p class='description'><span><data:description/></span></p>
+      </div>
+    </b:includable>
+    <b:includable id='title'>
+      <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
+        <data:title/>
+      </b:tag>
+    </b:includable>
+  </b:widget>
+</b:section>
+
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 
@@ -725,7 +778,7 @@
         </b:widget-settings>
         <b:includable id='main'>
 
-          <div :style='`background-image: url(${coverImage})`' class='w-full h-[60vh] bg-center bg-no-repeat bg-cover mb-8' x-data='metaData()'>
+          <div :style='`background-image: url(${coverImage})`' class='w-full h-[60vh] bg-center bg-no-repeat bg-cover mb-8 mt-12' x-data='metaData()'>
             <div class='w-full h-full bg-black bg-opacity-25'>
               <div class='container mx-auto h-full grid place-items-center lg:w-3/4'>
                 <div class='flex space-x-4 items-center flex-col md:flex-row'>
@@ -913,7 +966,7 @@
   </b:if>
   <b:if cond='data:view.isSearch'>
     <section>
-      <div class='container mx-auto my-8 rounded-md p-4 md:p-0' x-data='getProducts()'>
+      <div class='container mx-auto mb-8 mt-24 rounded-md p-4 md:p-0' x-data='getProducts()'>
 
         <template x-if='products.length == 0'>
           <div class='w-full h-60 grid place-items-center border-2 border-gray-100 border-dashed bg-gray-100'>
@@ -975,61 +1028,7 @@
 
 </b:if>
 
-<b:if cond='data:blog.pageType != &quot;index&quot;'>
 
-  <b:section id='productHeader-container'>
-    <b:widget id='Header2' locked='false' title='Product Catalog (Header)' type='Header' version='1'>
-      <b:widget-settings>
-        <b:widget-setting name='displayUrl'/>
-        <b:widget-setting name='displayHeight'>0</b:widget-setting>
-        <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
-        <b:widget-setting name='useImage'>false</b:widget-setting>
-        <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
-        <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
-        <b:widget-setting name='displayWidth'>0</b:widget-setting>
-      </b:widget-settings>
-      <b:includable id='main'>
-        <nav class='fixed w-full top-0 z-20 bg-gray-900 backdrop-blur-md ' id='navbar'>
-          <div class='container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center '>
-            <div class='flex justify-between w-full md:w-fit'>
-              <a class='font-bold text-2xl text-white' href='/'><data:title/></a>
-              <button class='text-white md:hidden hover:opacity-75' id='headerBtn'>
-                <svg class='w-5 h-54' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-                  <path d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5' stroke-linecap='round' stroke-linejoin='round'/>
-                </svg>
-              </button>
-            </div>
-            <div class='hidden md:flex space-x-4  flex-row '>
-              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
-              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
-            </div>
-          </div>
-
-          <aside class='fixed inset-y-0 z-20 flex-shrink-0 w-full mt-16 pt-5 overflow-y-auto bg-gray-900 md:hidden z-50 h-screen' x-data='' x-show='$store.navBar.isHeaderOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform -translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform -translate-x-20' x-transition:leave-start='opacity-100'>
-            <div class='flex space-y-4  flex-col px-6'>
-              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
-              <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
-            </div>
-          </aside>
-        </nav>
-
-
-
-
-      </b:includable>
-      <b:includable id='description'>
-        <div class='descriptionwrapper'>
-          <p class='description'><span><data:description/></span></p>
-        </div>
-      </b:includable>
-      <b:includable id='title'>
-        <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
-          <data:title/>
-        </b:tag>
-      </b:includable>
-    </b:widget>
-  </b:section>
-</b:if>
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
 
@@ -1044,8 +1043,8 @@
 
       <p class='font-bold text-lg px-1 md:hidden' x-html='product.title'> </p>
 
-      <div class='w-full md:w-1/3' style='max-height:700px'>
-        <div class='swiper mySwiper2'>
+      <div class='w-full md:w-1/3'>
+        <div class='swiper mySwiper2' style='max-height:700px'>
           <div class='swiper-wrapper'>
             <template key='i' x-for='(image,i) in product.images'>
               <div class='swiper-slide'>
@@ -1069,27 +1068,41 @@
         </div>
       </div>
       <div class='w-full md:w-3/5 bg-white shadow p-5'>
-        <p class='font-bold  text-2xl md:block hidden' x-html='product.title'> </p>
-
-        <p class='mt-3 md:mt-8 text-lg font-semibold' x-html='product.priceDisplay'/>
-
-
+        <p class='font-bold  text-2xl md:block hidden' x-html='product.title'>
+        </p>
         <div class='flex items-center mt-3'>
-
           <template key='i' x-for='(label,i) in product.labels'>
             <a :href='label.link' class='hover:opacity-75'>
               <span class='bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded mr-2' x-html='label.label'/>
             </a>
           </template>
         </div>
+        <p class='mt-3 md:mt-8 text-lg font-semibold' x-html='product.priceDisplay'/>
 
-        <template x-if='product.action'>
-          <a :href='product.action' class='border p-1 hover:opacity-75 rounded-md text-white text-sm font-semibold px-4 mt-4 shadow block w-fit' style='background-color: var(--primary-color)' target='_blank'>
-            Buy Now
-          </a>
-        </template>
+        <div class='w-full flex items-center space-x-4 mt-4'>
+          <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='reduceItemQty'>
+            <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+              <path d='M5 12h14' stroke-linecap='round' stroke-linejoin='round'/>
+            </svg>
+          </button>
+          <input class='border py-1 px-2 w-20' min='0' type='number' x-bind='qtyItemInput' x-data='' x-model='$store.cart.item.qty'/>
+          <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='increaseItemQty'>
+            <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+              <path d='M12 4.5v15m7.5-7.5h-15' stroke-linecap='round' stroke-linejoin='round'/>
+            </svg>
+          </button>
+        </div>
+        <div class='flex items-center  mt-4'>
+          <template x-if='product.action'>
+            <a :href='product.action' class='border py-2 hover:opacity-75 rounded-md text-white text-sm font-semibold px-4 mr-4 shadow block w-fit' style='background-color: var(--primary-color)' target='_blank'>
+              Buy Now
+            </a>
+          </template>
+          <button class='border py-2 flex space-x-2 items-center hover:opacity-75 rounded-md text-white text-sm font-semibold px-4 mr-4 shadow block w-fit bg-gray-400' x-bind='addToCart'>
+            Add to Cart
+          </button>
+        </div>
         <p class='text-gray-500 text-sm mt-5' x-html='product.description'>
-
         </p>
       </div>
     </div>
@@ -1145,6 +1158,69 @@
   </footer>
 </b:if>
 
+
+
+<button class=' fixed left-5  bottom-5 p-2 cursor-pointer z-50 bg-white rounded-full shadow hover:opacity-50' x-bind='openCloseCartBtn' x-data=''>
+  <svg class='w-10 h-10 ' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <path d='M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z' stroke-linecap='round' stroke-linejoin='round'/>
+  </svg>
+</button>
+
+<div class='fixed inset-0 z-50 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center' x-data='' x-show='$store.cart.isOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0' x-transition:leave-start='opacity-100'/>
+<aside class='fixed inset-y-0 right-0 z-50 flex-shrink-0 w-full md:w-2/5   bg-white p-1' x-bind='cart' x-data='' x-show='$store.cart.isOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform translate-x-20' x-transition:leave-start='opacity-100'>
+  <button class='rounded-full bg-gray-200 p-1 absolute top-2 right-2 hover:opacity-75' x-bind='openCloseCartBtn'>
+    <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M6 18 18 6M6 6l12 12' stroke-linecap='round' stroke-linejoin='round'/>
+    </svg>
+
+  </button>
+
+  <h2 class='text-2xl uppercase font-bold px-3 mt-4'>Cart</h2>
+
+  <div class='flex flex-col mt-4  overflow-y-auto' style='height: 72vh'>
+
+    <template x-data='' x-for='(item,index) in $store.cart.items'>
+      <div :key='index' class='flex space-x-2 p-2 relative mb-2'>
+        <button class='absolute top-0 left-2 rounded-full shadow bg-gray-100 text-red-500 border' x-bind='itemRemoveBtn'>
+          <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M6 18 18 6M6 6l12 12' stroke-linecap='round' stroke-linejoin='round'/>
+          </svg>
+        </button>
+        <img :alt='item.product.title' :src='item.product.img' class='w-20 h-20 object-cover rounded-md' style='min-width: 80px'/>
+        <div>
+          <p class='font-semibold line-clamp-1' x-html='item.product.title'/>
+          <p class='text-gray-600 text-sm' x-html='item.product.priceDisplay'/>
+          <div class='w-full flex items-center space-x-4 mt-2'>
+            <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='qtyReduceBtn'>
+              <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M5 12h14' stroke-linecap='round' stroke-linejoin='round'/>
+              </svg>
+            </button>
+            <input class='border py-1 px-2 w-20 qty-input' min='0' type='number' x-bind='qtyInput' x-model='item.qty'/>
+            <button class='border rounded-md bg-gray-200 hover:opacity-75 p-1' x-bind='qtyIncreaseBtn'>
+              <svg class='w-5 h-5' fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M12 4.5v15m7.5-7.5h-15' stroke-linecap='round' stroke-linejoin='round'/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <div class='border-t pt-5'>
+    <div class='flex justify-between items-center space-x-2 mb-8 px-10'>
+      <p class='text-2xl font-bold'>Total</p>
+      <p class='text-2xl font-bold' x-data='' x-html='$store.cart.total'/>
+    </div>
+    <button :disabled='$store.cart.items.length==0' class='w-10/12 mx-auto block rounded-md disabled:cursor-not-allowed  hover:opacity-75 text-xl font-semibold text-white py-2' style='background-color: var(--primary-color);' x-bind='checkoutBtn' x-data=''>
+      Checkout
+    </button>
+  </div>
+
+</aside>
+
+
 <script>
   const items = [];
 
@@ -1160,12 +1236,181 @@
         this.isHeaderOpen =  !this.isHeaderOpen
       },
     });
+
+
+    Alpine.store(&#39;cart&#39;,{
+      items:[],
+              item:{
+        title:&#39;&#39;,
+        price:&#39;&#39;,
+        img:&#39;&#39;,
+        qty:1,
+                link:&#39;&#39;
+      },
+      total:&#39;0&#39;,
+      isOpen:false,
+              init(){
+        const data = localStorage.getItem(&quot;cart&quot;)
+        if (data){
+          const jsonData = JSON.parse(data)
+          this.items = [...jsonData]
+        }
+      },
+      openCloseCart(){
+        this.isOpen =  !this.isOpen
+      },
+      removeItem(index){
+        this.items.splice(index,1)
+      },
+      increaseQty(index){
+        this.items[index].qty++
+      },
+      reduceQty(index){
+        let  qty =this.items[index].qty
+        qty--
+        if (qty&lt;1){
+          qty = 1
+        }
+        this.items[index].qty=qty
+      },
+      setQty(index,qty){
+        const quantity=parseInt(qty)
+        if (quantity&gt;0){
+          this.items[index].qty = quantity
+        }else {
+          this.items[index].qty=1
+        }
+
+      },
+      setTotal(total){
+        this.total = total
+      },
+      setItem(item){
+        this.item = {...item,qty: 1}
+      },
+      increaseItemQty(){
+        this.item.qty++
+      },
+      reduceItemQty(){
+        let qty = this.item.qty
+
+        qty--
+        if (qty&lt;1){
+          qty = 1
+        }
+        this.item.qty = qty
+      },
+      setItemQty(qty){
+        const quantity=parseInt(qty)
+        if (quantity&gt;0){
+          this.item.qty = quantity
+        }else {
+          this.item.qty=1
+        }
+      },
+      addToCart(){
+        const index = this.items.findIndex(item=&gt;item.product.link == this.item.link)
+        if (index&gt;-1){
+          this.items[index].qty = parseInt(this.items[index].qty) + parseInt(this.item.qty)
+        }else {
+          const data = {...this.item};
+          delete data.qty
+          this.items.push({
+            product:{...data},
+            qty:this.item.qty
+          })
+        }
+        this.isOpen =  true
+        this.item.qty = 1
+      }
+    });
+
+
+    Alpine.effect(() =&gt; {
+      const items = Alpine.store(&#39;cart&#39;).items
+    if (items.length&gt;0){
+      const symBol = items[0].product.priceSymbol;
+      let price=0
+      items.forEach(item=&gt;{
+        price = price + (item.qty * parseFloat(item.product.price))
+      })
+
+      Alpine.store(&#39;cart&#39;).setTotal(`${symBol} ${price}`);
+    }else {
+      Alpine.store(&#39;cart&#39;).setTotal(`0`);
+    }
+
+    localStorage.setItem(&quot;cart&quot;,JSON.stringify(items));
+  });
+
+    Alpine.bind(&#39;qtyIncreaseBtn&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).increaseQty(index)`,
+  }))
+    Alpine.bind(&#39;qtyReduceBtn&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).reduceQty(index)`,
+  }))
+    Alpine.bind(&#39;qtyInput&#39;, () =&gt; ({
+            &#39;@blur&#39;: `Alpine.store(&#39;cart&#39;).setQty(index,item.qty)`,
+  }))
+    Alpine.bind(&#39;itemRemoveBtn&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).removeItem(index)`,
+  }))
+    Alpine.bind(&#39;openCloseCartBtn&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).openCloseCart()`,
+  }))
+
+
+    Alpine.bind(&#39;increaseItemQty&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).increaseItemQty()`,
+  }))
+    Alpine.bind(&#39;reduceItemQty&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).reduceItemQty()`,
+  }))
+    Alpine.bind(&#39;qtyItemInput&#39;, () =&gt; ({
+            &#39;@blur&#39;: `Alpine.store(&#39;cart&#39;).setItemQty($store.cart.item.qty)`,
+  }))
+
+
+
+    Alpine.bind(&#39;addToCart&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;cart&#39;).addToCart()`,
+  }))
+
+    Alpine.bind(&#39;cart&#39;, () =&gt; ({
+            &#39;@click.away&#39;: `Alpine.store(&#39;cart&#39;).openCloseCart()`,
+  &#39;@keydown.escape&#39;: `Alpine.store(&#39;cart&#39;).openCloseCart()`,
+  }))
+
+    Alpine.bind(&#39;checkoutBtn&#39;, () =&gt; ({
+            &#39;@click&#39;(){
+      const data = localStorage.getItem(&quot;cart&quot;)
+      if (data){
+        const items =JSON.parse(data);
+        let message = &quot;Order\n\n\n&quot;;
+        let whatsapp = &quot;&quot;;
+        items.forEach((item,index)=&gt;{
+          if (!whatsapp){
+          whatsapp = item.product.whatsapp
+        }
+        message+=`Item ${index+1} \n\n`
+        message+=`Item name : ${item.product.title.toString().trim()}\n`
+        message+=`Quantity : ${item.qty}\n`
+        message+=`Item Link: ${item.product.link.toString().trim()}\n`
+        message+=`\n\n\n`
+      })
+        const action=`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+        window.open(action, &quot;_blank&quot;);
+      }
+    },
+  }))
+
+
+    Alpine.bind(&#39;headerBtn&#39;, () =&gt; ({
+            &#39;@click&#39;: `Alpine.store(&#39;navBar&#39;).openCloseHeader()`,
+  }))
   })
 
 
-  document.getElementById(&quot;headerBtn&quot;)?.addEventListener(&quot;click&quot;,()=&gt;{
-    Alpine.store(&#39;navBar&#39;).openCloseHeader()
-  })
 
   const getProducts=()=&gt;{
     return {
@@ -1380,6 +1625,7 @@
       let priceSymbol=&quot;&quot;;
       let description=&quot;&quot;;
       let action=&quot;&quot;;
+      let whatsapp=&quot;&quot;;
       const imgs = element.querySelectorAll(
               &#39;.post-body.entry-content img&#39;
     );
@@ -1398,7 +1644,7 @@
       }else if (content.toLowerCase().includes(&quot;price&quot;)){
         price=content.split(&quot;:&quot;)[1].trim();
       }else if (content.toLowerCase().includes(&quot;whatsapp&quot;)){
-        const whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+        whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
         const message=encodeURIComponent(&#39;Hi I like to know more info\n&#39;);
         action=`https://wa.me/${whatsapp}?text=${message} ${window.location.href} `;
 
@@ -1416,6 +1662,7 @@
 
       const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
       content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
+      content.querySelectorAll(&quot;.separator&quot;).forEach(item =&gt; item.remove());
       content.querySelectorAll(&quot;p&quot;).forEach(p =&gt;{
         const data=p.innerHTML.toString()
         if (data.toLowerCase().includes(&quot;price_symbol&quot;)){
@@ -1423,6 +1670,8 @@
       }else if (data.toLowerCase().includes(&quot;price&quot;)){
         p.remove()
       }else if (data.toLowerCase().includes(&quot;whatsapp&quot;)){
+        p.remove()
+      }else if (p.children.length == 1 &amp;&amp; p.children[0].tagName == &#39;BR&#39;){
         p.remove()
       }
     });
@@ -1443,6 +1692,18 @@
               description,
               timeStamp
     }
+
+      Alpine.store(&#39;cart&#39;).setItem({
+        whatsapp,
+        title,
+        img:imgs[0].src,
+        priceDisplay:`${priceSymbol} ${price}`,
+        priceSymbol:priceSymbol,
+        price:price,
+        qty:1,
+        link:window.location.href
+      })
+
     },
   }
   }
