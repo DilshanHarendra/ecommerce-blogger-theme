@@ -1085,145 +1085,145 @@
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
   <script>
-  const getProducts=()=&gt;{
-    return {
-      products: [],
-      newProducts: [],
-      originalProducts: [],
-      filter:&#39;NtoO&#39;,
-    search:&#39;&#39;,
-    init() {
-      const elements = document.querySelectorAll(&#39;.post-outer&#39;);
-      let price=0;
-      let priceSymbol=&quot;&quot;;
-      let description=&quot;&quot;;
-      const newProducts=[]
-      elements.forEach((element) =&gt; {
+    const getProducts=()=&gt;{
+      return {
+        products: [],
+        newProducts: [],
+        originalProducts: [],
+        filter:&#39;NtoO&#39;,
+      search:&#39;&#39;,
+      init() {
+        const elements = document.querySelectorAll(&#39;.post-outer&#39;);
+        let price=0;
+        let priceSymbol=&quot;&quot;;
+        let description=&quot;&quot;;
+        const newProducts=[]
+        elements.forEach((element) =&gt; {
+          const imgs = element.querySelectorAll(
+                  &#39;.post-body.entry-content img&#39;
+      );
+        const a = element.querySelector(&#39;.post-title.entry-title a&#39;);
+        const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
+        const timeStamp = element.querySelector(&#39;.published&#39;).innerHTML.toString().trim();
+        const labelSpan = element.querySelectorAll(&#39;.post-labels a&#39;);
+        const title =a.innerHTML
+        if(title.toString().toLowerCase() !=&#39;meta&#39;){
+          p.forEach(item=&gt;{
+            const content=item.innerHTML.toString();
+            if (content.toLowerCase().includes(&quot;price_symbol&quot;)){
+            priceSymbol=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;price&quot;)){
+            price=content.split(&quot;:&quot;)[1].trim();
+          }else{
+            description=content;
+          }
+        })
+          const product={
+            image: imgs[0].src,
+            title: a.innerHTML,
+            link: a.href,
+            price:price,
+            priceDisplay: `${price} ${priceSymbol}`,
+            priceSymbol:priceSymbol,
+            description,
+            timeStamp
+          }
+          items.push(product);
+          labelSpan.forEach(item=&gt;{
+            const label=item.innerHTML.toString().trim();
+            if (label.toString().toLowerCase() == &#39;new&#39;){
+            newProducts.push(product)
+          }
+        })
+        };
+      });
+        this.products =   items.sort((a,b)=&gt;moment(b.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(a.timeStamp,&#39;MMM Do, YYYY&#39;)));
+        this.originalProducts= [...this.products];
+        this.newProducts = [...newProducts];
+
+        this.$watch(&#39;filter&#39;,filter=&gt;{
+          if(filter == &quot;OtoN&quot;){
+            this.products =  this.products.sort((a,b) =&gt; moment(a.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(b.timeStamp,&#39;MMM Do, YYYY&#39;)))
+          }else if(filter==&quot;NtoO&quot;){
+            this.products =  this.products.sort((a,b) =&gt; moment(b.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(a.timeStamp,&#39;MMM Do, YYYY&#39;)))
+          }else if (filter == &quot;LtoH&quot;){
+            this.products =  this.products.sort((a,b) =&gt; +a.price &gt; +b.price ? 1:-1)
+          }else if (filter == &quot;HtoL&quot;){
+            this.products =  this.products.sort((a,b) =&gt; +a.price &lt; +b.price ? 1:-1)
+          }
+        })
+      },
+
+    };
+    }
+
+    const metaData=()=&gt;{
+      return {
+        coverImage: &quot;&quot;,
+      meta:{
+        whatsapp:&#39;&#39;,
+        whatsappLink:&#39;&#39;,
+        phone:&#39;&#39;,
+        address:&#39;&#39;,
+        email:&#39;&#39;,
+        socialMeda:{
+          facebook:&#39;&#39;,
+          instagram:&#39;&#39;,
+          tiktok:&#39;&#39;
+        }
+      },
+      init() {
+        const elements = document.querySelectorAll(&#39;.post-outer&#39;);
+
+        elements.forEach((element) =&gt; {
+          const a = element.querySelector(&#39;.post-title.entry-title a&#39;);
+        const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p &#39;);
+
+        const title =a?.innerHTML || &#39;&#39;;
         const imgs = element.querySelectorAll(
                 &#39;.post-body.entry-content img&#39;
-    );
-      const a = element.querySelector(&#39;.post-title.entry-title a&#39;);
-      const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
-      const timeStamp = element.querySelector(&#39;.published&#39;).innerHTML.toString().trim();
-      const labelSpan = element.querySelectorAll(&#39;.post-labels a&#39;);
-      const title =a.innerHTML
-      if(title.toString().toLowerCase() !=&#39;meta&#39;){
-        p.forEach(item=&gt;{
-          const content=item.innerHTML.toString();
-          if (content.toLowerCase().includes(&quot;price_symbol&quot;)){
-          priceSymbol=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;price&quot;)){
-          price=content.split(&quot;:&quot;)[1].trim();
-        }else{
-          description=content;
-        }
-      })
-        const product={
-          image: imgs[0].src,
-          title: a.innerHTML,
-          link: a.href,
-          price:price,
-          priceDisplay: `${price} ${priceSymbol}`,
-          priceSymbol:priceSymbol,
-          description,
-          timeStamp
-        }
-        items.push(product);
-        labelSpan.forEach(item=&gt;{
-          const label=item.innerHTML.toString().trim();
-          if (label.toString().toLowerCase() == &#39;new&#39;){
-          newProducts.push(product)
-        }
-      })
-      };
-    });
-      this.products =   items.sort((a,b)=&gt;moment(b.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(a.timeStamp,&#39;MMM Do, YYYY&#39;)));
-      this.originalProducts= [...this.products];
-      this.newProducts = [...newProducts];
+      );
+        if(title.toString().toLowerCase() ==&#39;meta&#39;){
 
-      this.$watch(&#39;filter&#39;,filter=&gt;{
-        if(filter == &quot;OtoN&quot;){
-          this.products =  this.products.sort((a,b) =&gt; moment(a.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(b.timeStamp,&#39;MMM Do, YYYY&#39;)))
-        }else if(filter==&quot;NtoO&quot;){
-          this.products =  this.products.sort((a,b) =&gt; moment(b.timeStamp,&#39;MMM Do, YYYY&#39;).diff(moment(a.timeStamp,&#39;MMM Do, YYYY&#39;)))
-        }else if (filter == &quot;LtoH&quot;){
-          this.products =  this.products.sort((a,b) =&gt; +a.price &gt; +b.price ? 1:-1)
-        }else if (filter == &quot;HtoL&quot;){
-          this.products =  this.products.sort((a,b) =&gt; +a.price &lt; +b.price ? 1:-1)
-        }
-      })
-    },
+          this.coverImage=imgs[0].src
 
-  };
-  }
-
-  const metaData=()=&gt;{
-    return {
-      coverImage: &quot;&quot;,
-    meta:{
-      whatsapp:&#39;&#39;,
-      whatsappLink:&#39;&#39;,
-      phone:&#39;&#39;,
-      address:&#39;&#39;,
-      email:&#39;&#39;,
-      socialMeda:{
-        facebook:&#39;&#39;,
-        instagram:&#39;&#39;,
-        tiktok:&#39;&#39;
-      }
-    },
-    init() {
-      const elements = document.querySelectorAll(&#39;.post-outer&#39;);
-
-      elements.forEach((element) =&gt; {
-        const a = element.querySelector(&#39;.post-title.entry-title a&#39;);
-      const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p &#39;);
-
-      const title =a?.innerHTML || &#39;&#39;;
-      const imgs = element.querySelectorAll(
-              &#39;.post-body.entry-content img&#39;
-    );
-      if(title.toString().toLowerCase() ==&#39;meta&#39;){
-
-        this.coverImage=imgs[0].src
-
-        const imageMetaTag=document.querySelector(&#39;meta[property=&quot;og:image&quot;]&#39;);
-        imageMetaTag.setAttribute(&#39;content&#39;,imgs[0].src);
+          const imageMetaTag=document.querySelector(&#39;meta[property=&quot;og:image&quot;]&#39;);
+          imageMetaTag.setAttribute(&#39;content&#39;,imgs[0].src);
 
 
 
-        p.forEach(item=&gt;{
-          const content=item.innerHTML.toString()
+          p.forEach(item=&gt;{
+            const content=item.innerHTML.toString()
 
-          if (content.toLowerCase().includes(&quot;phone&quot;)){
-          this.meta.phone=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;address&quot;)){
-          this.meta.address=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;whatsapp&quot;)){
-          const whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-          this.meta.whatsapp=whatsapp;
-          const message=encodeURIComponent(&#39;Hi I like to know more info\n&#39;);
-          this.meta.whatsappLink=`https://wa.me/${whatsapp}?text=${message} ${window.location.href}`;
-        }else if (content.toLowerCase().includes(&quot;email&quot;)){
-          this.meta.email=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;facebook&quot;)){
-          this.meta.socialMeda.facebook=removeUnicode(content.split(&#39;Facebook:&#39;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;instagram&quot;)){
-          this.meta.socialMeda.instagram=removeUnicode(content.split(&#39;Instagram:&#39;)[1].trim());
-        }else if (content.toLowerCase().includes(&quot;tiktok&quot;)){
-          this.meta.socialMeda.tiktok=removeUnicode(content.split(&#39;Tiktok:&#39;)[1].trim());
-        }
-      })
+            if (content.toLowerCase().includes(&quot;phone&quot;)){
+            this.meta.phone=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;address&quot;)){
+            this.meta.address=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;whatsapp&quot;)){
+            const whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+            this.meta.whatsapp=whatsapp;
+            const message=encodeURIComponent(&#39;Hi I like to know more info\n&#39;);
+            this.meta.whatsappLink=`https://wa.me/${whatsapp}?text=${message} ${window.location.href}`;
+          }else if (content.toLowerCase().includes(&quot;email&quot;)){
+            this.meta.email=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;facebook&quot;)){
+            this.meta.socialMeda.facebook=removeUnicode(content.split(&#39;Facebook:&#39;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;instagram&quot;)){
+            this.meta.socialMeda.instagram=removeUnicode(content.split(&#39;Instagram:&#39;)[1].trim());
+          }else if (content.toLowerCase().includes(&quot;tiktok&quot;)){
+            this.meta.socialMeda.tiktok=removeUnicode(content.split(&#39;Tiktok:&#39;)[1].trim());
+          }
+        })
 
-        localStorage.setItem(&quot;social-media&quot;,JSON.stringify(this.meta.socialMeda));
-        localStorage.setItem(&quot;whatsapp&quot;,this.meta.whatsapp);
-      };
+          localStorage.setItem(&quot;social-media&quot;,JSON.stringify(this.meta.socialMeda));
+          localStorage.setItem(&quot;whatsapp&quot;,this.meta.whatsapp);
+        };
 
-    });
-    },
-  };
-  }
-</script>
+      });
+      },
+    };
+    }
+  </script>
 </b:if>
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
@@ -1357,31 +1357,23 @@
 </b:if>
 
 <b:if cond='data:blog.pageType == &quot;static_page&quot;'>
-
-  <div class='p-2 mt-24' x-data='getPage()'>
-    <p class='text-center text-3xl font-semibold mb-3' x-html='title'/>
-    <div class='container mx-auto py-5' x-html='description'>
-    </div>
-  </div>
-
-</b:if>
   <script>
-  const getPage=()=&gt;{
-    return{
-      title:&quot;&quot;,
-    description:&quot;&quot;,
-    init(){
-      const element = document.querySelector(&quot;.post-outer&quot;);
-      const h3 = element.querySelector(&quot;.post-title.entry-title&quot;);
-      const title =h3.innerHTML
-      const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
-      content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
-      this.title=title;
-      this.description =content.innerHTML;
+    const getPage=()=&gt;{
+      return{
+        title:&quot;&quot;,
+      description:&quot;&quot;,
+      init(){
+        const element = document.querySelector(&quot;.post-outer&quot;);
+        const h3 = element.querySelector(&quot;.post-title.entry-title&quot;);
+        const title =h3.innerHTML
+        const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
+        content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
+        this.title=title;
+        this.description =content.innerHTML;
+      }
     }
-  }
-  }
-</script>
+    }
+  </script>
 </b:if>
 </body>
 </html>
