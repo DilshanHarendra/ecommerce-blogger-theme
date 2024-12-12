@@ -1062,8 +1062,29 @@
   }))
   })
 
+  const getFooter = ()=&gt;{
 
+    return {
+      meta:{
+        socialMeda:{
+          facebook:&#39;&#39;,
+    instagram:&#39;&#39;,
+    tiktok:&#39;&#39;
+  }
+  },
+    init() {
+      const data = localStorage.getItem(&quot;social-media&quot;);
+      if(data){
+        this.meta.socialMeda =JSON.parse(data)
+      }
+    }
+  }
+  }
 
+</script>
+
+<b:if cond='data:blog.pageType == &quot;index&quot;'>
+  <script>
   const getProducts=()=&gt;{
     return {
       products: [],
@@ -1202,151 +1223,149 @@
     },
   };
   }
+</script>
+</b:if>
 
-  const getFooter = ()=&gt;{
-
-    return {
-      meta:{
-        socialMeda:{
-          facebook:&#39;&#39;,
-    instagram:&#39;&#39;,
-    tiktok:&#39;&#39;
-  }
-  },
-    init() {
-      const data = localStorage.getItem(&quot;social-media&quot;);
-      if(data){
-        this.meta.socialMeda =JSON.parse(data)
-      }
-    }
-  }
-  }
-  setTimeout(()=&gt;{
-    var swiperPreview = new Swiper(&quot;.mySwiper&quot;, {
-    loop: true,
-    spaceBetween: 10,
-    slidesPerView: 5,
-    freeMode: true,
-    watchSlidesProgress: true,
-  });
-  var swiper2 = new Swiper(&quot;.mySwiper2&quot;, {
-    loop: true,
-            spaceBetween: 10,
-            navigation: {
-      nextEl: &quot;.swiper-button-next&quot;,
-      prevEl: &quot;.swiper-button-prev&quot;,
-    },
-    thumbs: {
-      swiper: swiperPreview,
-    },
-  });
-
-
-  var swiper = new Swiper(&quot;.new-products&quot;, {
-    slidesPerView: 4,
-            spaceBetween: 20,
-            navigation: {
-      nextEl: &quot;.swiper-button-next&quot;,
-      prevEl: &quot;.swiper-button-prev&quot;,
-    },
-    pagination: {
-      el: &quot;.swiper-pagination&quot;,
-      clickable: true,
-    },
-  });
-
-  },300);
-  const getProduct=()=&gt;{
-    return{
-      product:{
-        images: [],
-        labels: [],
-        title: &#39;&#39;,
-    link: &#39;&#39;,
-    price:&#39;&#39;,
-    priceDisplay: &#39;&#39;,
-    priceSymbol:&#39;&#39;,
-    description:&#39;&#39;,
-    timeStamp:&#39;&#39;,
-    action:&quot;&quot;,
-  },
-    init(){
-      const element = document.querySelector(&#39;.post-outer&#39;);
-
-      let price=0;
-      let priceSymbol=&quot;&quot;;
-      let description=&quot;&quot;;
-      let action=&quot;&quot;;
-      const imgs = element.querySelectorAll(
-              &#39;.post-body.entry-content img&#39;
-    );
-      const h3 = element.querySelector(&#39;.post-title.entry-title&#39;);
-      const labelSpan = element.querySelectorAll(&#39;.post-labels a&#39;);
-      const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
-      const timeStamp = element.querySelector(&#39;.published&#39;).innerHTML.toString().trim();
-      const title =h3.innerHTML
-      const labels = [];
-
-
-      p.forEach(item=&gt;{
-        const content=item.innerHTML.toString()
-        if (content.toLowerCase().includes(&quot;price_symbol&quot;)){
-        priceSymbol=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-      }else if (content.toLowerCase().includes(&quot;price&quot;)){
-        price=content.split(&quot;:&quot;)[1].trim();
-      }else if (content.toLowerCase().includes(&quot;whatsapp&quot;)){
-        const whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
-        const message=encodeURIComponent(&#39;Hi I like to know more info\n&#39;);
-        action=`https://wa.me/${whatsapp}?text=${message} ${window.location.href} `;
-
-      }
-    })
-
-      labelSpan.forEach(item=&gt;{
-        const label=item.innerHTML.toString().trim();
-        labels.push({
-          label:label,
-          link: item.getAttribute(&quot;href&quot;)
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+  <script>
+    setTimeout(()=&gt;{
+      var swiperPreview = new Swiper(&quot;.mySwiper&quot;, {
+      loop: true,
+      spaceBetween: 10,
+      slidesPerView: 5,
+      freeMode: true,
+      watchSlidesProgress: true,
     });
-    })
-
-
-      const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
-      content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
-      content.querySelectorAll(&quot;.separator&quot;).forEach(item =&gt; item.remove());
-      content.querySelectorAll(&quot;p&quot;).forEach(p =&gt;{
-        const data=p.innerHTML.toString()
-        if (data.toLowerCase().includes(&quot;price_symbol&quot;)){
-        p.remove()
-      }else if (data.toLowerCase().includes(&quot;price&quot;)){
-        p.remove()
-      }else if (data.toLowerCase().includes(&quot;whatsapp&quot;)){
-        p.remove()
-      }else if (p.children.length == 1 &amp;&amp; p.children[0].tagName == &#39;BR&#39;){
-        p.remove()
-      }
+    var swiper2 = new Swiper(&quot;.mySwiper2&quot;, {
+      loop: true,
+              spaceBetween: 10,
+              navigation: {
+        nextEl: &quot;.swiper-button-next&quot;,
+        prevEl: &quot;.swiper-button-prev&quot;,
+      },
+      thumbs: {
+        swiper: swiperPreview,
+      },
     });
-      description=content.innerHTML;
-
-      const imageMetaTag=document.querySelector(&#39;meta[property=&quot;og:image&quot;]&#39;);
-      imageMetaTag.setAttribute(&#39;content&#39;,imgs[0].src);
 
 
-      this.product={
-        action: action,
-        images: [...imgs].map(img=&gt;img.src),
-      labels:labels,
-              title,
-              price:price,
-              priceDisplay: `${priceSymbol} ${price}`,
-              priceSymbol:priceSymbol,
-              description,
-              timeStamp
-    }
+    var swiper = new Swiper(&quot;.new-products&quot;, {
+      slidesPerView: 4,
+              spaceBetween: 20,
+              navigation: {
+        nextEl: &quot;.swiper-button-next&quot;,
+        prevEl: &quot;.swiper-button-prev&quot;,
+      },
+      pagination: {
+        el: &quot;.swiper-pagination&quot;,
+        clickable: true,
+      },
+    });
+
+    },300);
+    const getProduct=()=&gt;{
+      return{
+        product:{
+          images: [],
+          labels: [],
+          title: &#39;&#39;,
+      link: &#39;&#39;,
+      price:&#39;&#39;,
+      priceDisplay: &#39;&#39;,
+      priceSymbol:&#39;&#39;,
+      description:&#39;&#39;,
+      timeStamp:&#39;&#39;,
+      action:&quot;&quot;,
     },
-  }
-  }
+      init(){
+        const element = document.querySelector(&#39;.post-outer&#39;);
 
+        let price=0;
+        let priceSymbol=&quot;&quot;;
+        let description=&quot;&quot;;
+        let action=&quot;&quot;;
+        const imgs = element.querySelectorAll(
+                &#39;.post-body.entry-content img&#39;
+      );
+        const h3 = element.querySelector(&#39;.post-title.entry-title&#39;);
+        const labelSpan = element.querySelectorAll(&#39;.post-labels a&#39;);
+        const p = element.querySelectorAll(&#39;.post-body.entry-content.float-container p span &#39;);
+        const timeStamp = element.querySelector(&#39;.published&#39;).innerHTML.toString().trim();
+        const title =h3.innerHTML
+        const labels = [];
+
+
+        p.forEach(item=&gt;{
+          const content=item.innerHTML.toString()
+          if (content.toLowerCase().includes(&quot;price_symbol&quot;)){
+          priceSymbol=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+        }else if (content.toLowerCase().includes(&quot;price&quot;)){
+          price=content.split(&quot;:&quot;)[1].trim();
+        }else if (content.toLowerCase().includes(&quot;whatsapp&quot;)){
+          const whatsapp=removeUnicode(content.split(&quot;:&quot;)[1].trim());
+          const message=encodeURIComponent(&#39;Hi I like to know more info\n&#39;);
+          action=`https://wa.me/${whatsapp}?text=${message} ${window.location.href} `;
+
+        }
+      })
+
+        labelSpan.forEach(item=&gt;{
+          const label=item.innerHTML.toString().trim();
+          labels.push({
+            label:label,
+            link: item.getAttribute(&quot;href&quot;)
+      });
+      })
+
+
+        const content=element.querySelector(&quot;.post-body.entry-content.float-container&quot;);
+        content.querySelectorAll(&quot;img&quot;).forEach(img =&gt; img.remove());
+        content.querySelectorAll(&quot;.separator&quot;).forEach(item =&gt; item.remove());
+        content.querySelectorAll(&quot;p&quot;).forEach(p =&gt;{
+          const data=p.innerHTML.toString()
+          if (data.toLowerCase().includes(&quot;price_symbol&quot;)){
+          p.remove()
+        }else if (data.toLowerCase().includes(&quot;price&quot;)){
+          p.remove()
+        }else if (data.toLowerCase().includes(&quot;whatsapp&quot;)){
+          p.remove()
+        }else if (p.children.length == 1 &amp;&amp; p.children[0].tagName == &#39;BR&#39;){
+          p.remove()
+        }
+      });
+        description=content.innerHTML;
+
+        const imageMetaTag=document.querySelector(&#39;meta[property=&quot;og:image&quot;]&#39;);
+        imageMetaTag.setAttribute(&#39;content&#39;,imgs[0].src);
+
+
+        this.product={
+          action: action,
+          images: [...imgs].map(img=&gt;img.src),
+        labels:labels,
+                title,
+                price:price,
+                priceDisplay: `${priceSymbol} ${price}`,
+                priceSymbol:priceSymbol,
+                description,
+                timeStamp
+      }
+      },
+    }
+    }
+  </script>
+</b:if>
+
+<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+
+  <div class='p-2 mt-24' x-data='getPage()'>
+    <p class='text-center text-3xl font-semibold mb-3' x-html='title'/>
+    <div class='container mx-auto py-5' x-html='description'>
+    </div>
+  </div>
+
+</b:if>
+  <script>
   const getPage=()=&gt;{
     return{
       title:&quot;&quot;,
@@ -1362,7 +1381,7 @@
     }
   }
   }
-
 </script>
+</b:if>
 </body>
 </html>
