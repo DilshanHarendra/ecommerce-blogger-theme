@@ -24,7 +24,7 @@
   <meta content='https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html' property='og:url'/>
   <meta content='One Shoulder Mini Dress' property='og:title'/>
   <meta content='This is a search description' property='og:description'/>
-  <meta content='https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sNxg3ztKFCG_nkUR9aoGmWBh-Pfsw5RYN4gcF2VRGVx8ld7RYiqTYwZFnE3NGZYwuZoUuPmspfvN5Y7_kRiQ3Zh16PU0KBXnKrAzwR2cJpCpXsvxa5eWMF9rQNZx4JAI5nxn5xNc2p0TKOKktQxixFvZvNjU0suiDXE-UV-is0IXaKtGM=w1200-h630-p-k-no-nu' property='og:image'/>
+  <meta content='https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vcocKTASm-_CaJWYy-DT91Q3hNAqOQMC6Hys2JSesy2kz2RMNyQC7qYB9GCmdUNe8FffPP08XwspmgdOoe0k-zHBv5hKIYxSaCsdRlJIrx14obODbS4F5S1k2DfB4gVp3gLT-PsPpQ31oShv5V79cB4IbiY4gVKbwFKOlxhucD7qfcIyY=w1200-h630-p-k-no-nu' property='og:image'/>
   <script src='https://cdn.tailwindcss.com'></script>
   <script defer='defer' src='//unpkg.com/alpinejs'></script>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css' rel='stylesheet'/>
@@ -58,7 +58,7 @@
   }
 
   --></style>
-  <link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=f34ae2d6-4712-4683-917d-21c0722382ad' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=f34ae2d6-4712-4683-917d-21c0722382ad' rel='stylesheet'/></noscript>
+  <link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=cbf497ff-62ed-4b99-8bcb-ca4bdeb7658c' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=5963326103498819871&amp;zx=cbf497ff-62ed-4b99-8bcb-ca4bdeb7658c' rel='stylesheet'/></noscript>
   <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
   <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 
@@ -78,7 +78,7 @@
             },
             "headline": "One Shoulder Mini Dress","description": "&#160;&#160; Price: 1980.00 Price_Symbol: LKR&#160; Whatsapp: +947535454870&#160; Dress Occasional \u0026amp; Evening Wear Material : Polyester Material&#160;Composition ...","datePublished": "2024-12-08T07:20:00-08:00",
             "dateModified": "2024-12-08T12:54:33-08:00","image": {
-              "@type": "ImageObject","url": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sNxg3ztKFCG_nkUR9aoGmWBh-Pfsw5RYN4gcF2VRGVx8ld7RYiqTYwZFnE3NGZYwuZoUuPmspfvN5Y7_kRiQ3Zh16PU0KBXnKrAzwR2cJpCpXsvxa5eWMF9rQNZx4JAI5nxn5xNc2p0TKOKktQxixFvZvNjU0suiDXE-UV-is0IXaKtGM=w1200-h630-p-k-no-nu",
+              "@type": "ImageObject","url": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vcocKTASm-_CaJWYy-DT91Q3hNAqOQMC6Hys2JSesy2kz2RMNyQC7qYB9GCmdUNe8FffPP08XwspmgdOoe0k-zHBv5hKIYxSaCsdRlJIrx14obODbS4F5S1k2DfB4gVp3gLT-PsPpQ31oShv5V79cB4IbiY4gVKbwFKOlxhucD7qfcIyY=w1200-h630-p-k-no-nu",
               "height": 630,
               "width": 1200},"publisher": {
               "@type": "Organization",
@@ -262,8 +262,6 @@ woman
 </footer>
 <script>
   const items = [];
-
-
   const removeUnicode=(txt)=>{
     return txt.replace(/&[a-zA-Z0-9#]+;/g, '')
   };
@@ -280,147 +278,6 @@ woman
       '@click': `Alpine.store('navBar').openCloseHeader()`,
     }))
   })
-
-
-
-  const getProducts=()=>{
-    return {
-      products: [],
-      newProducts: [],
-      originalProducts: [],
-      filter:'NtoO',
-      search:'',
-      init() {
-        const elements = document.querySelectorAll('.post-outer');
-        let price=0;
-        let priceSymbol="";
-        let description="";
-        const newProducts=[]
-        elements.forEach((element) => {
-          const imgs = element.querySelectorAll(
-                  '.post-body.entry-content img'
-          );
-          const a = element.querySelector('.post-title.entry-title a');
-          const p = element.querySelectorAll('.post-body.entry-content.float-container p span ');
-          const timeStamp = element.querySelector('.published').innerHTML.toString().trim();
-          const labelSpan = element.querySelectorAll('.post-labels a');
-          const title =a.innerHTML
-          if(title.toString().toLowerCase() !='meta'){
-            p.forEach(item=>{
-              const content=item.innerHTML.toString();
-              if (content.toLowerCase().includes("price_symbol")){
-                priceSymbol=removeUnicode(content.split(":")[1].trim());
-              }else if (content.toLowerCase().includes("price")){
-                price=content.split(":")[1].trim();
-              }else{
-                description=content;
-              }
-            })
-            const product={
-              image: imgs[0].src,
-              title: a.innerHTML,
-              link: a.href,
-              price:price,
-              priceDisplay: `${price} ${priceSymbol}`,
-              priceSymbol:priceSymbol,
-              description,
-              timeStamp
-            }
-            items.push(product);
-            labelSpan.forEach(item=>{
-              const label=item.innerHTML.toString().trim();
-              if (label.toString().toLowerCase() == 'new'){
-                newProducts.push(product)
-              }
-            })
-          };
-        });
-        this.products =   items.sort((a,b)=>moment(b.timeStamp,'MMM Do, YYYY').diff(moment(a.timeStamp,'MMM Do, YYYY')));
-        this.originalProducts= [...this.products];
-        this.newProducts = [...newProducts];
-
-        this.$watch('filter',filter=>{
-          if(filter == "OtoN"){
-            this.products =  this.products.sort((a,b) => moment(a.timeStamp,'MMM Do, YYYY').diff(moment(b.timeStamp,'MMM Do, YYYY')))
-          }else if(filter=="NtoO"){
-            this.products =  this.products.sort((a,b) => moment(b.timeStamp,'MMM Do, YYYY').diff(moment(a.timeStamp,'MMM Do, YYYY')))
-          }else if (filter == "LtoH"){
-            this.products =  this.products.sort((a,b) => +a.price > +b.price ? 1:-1)
-          }else if (filter == "HtoL"){
-            this.products =  this.products.sort((a,b) => +a.price < +b.price ? 1:-1)
-          }
-        })
-      },
-
-    };
-  }
-
-  const metaData=()=>{
-    return {
-      coverImage: "",
-      meta:{
-        whatsapp:'',
-        whatsappLink:'',
-        phone:'',
-        address:'',
-        email:'',
-        socialMeda:{
-          facebook:'',
-          instagram:'',
-          tiktok:''
-        }
-      },
-      init() {
-        const elements = document.querySelectorAll('.post-outer');
-
-        elements.forEach((element) => {
-          const a = element.querySelector('.post-title.entry-title a');
-          const p = element.querySelectorAll('.post-body.entry-content.float-container p ');
-
-          const title =a?.innerHTML || '';
-          const imgs = element.querySelectorAll(
-                  '.post-body.entry-content img'
-          );
-          if(title.toString().toLowerCase() =='meta'){
-
-            this.coverImage=imgs[0].src
-
-            const imageMetaTag=document.querySelector('meta[property="og:image"]');
-            imageMetaTag.setAttribute('content',imgs[0].src);
-
-
-
-            p.forEach(item=>{
-              const content=item.innerHTML.toString()
-
-              if (content.toLowerCase().includes("phone")){
-                this.meta.phone=removeUnicode(content.split(":")[1].trim());
-              }else if (content.toLowerCase().includes("address")){
-                this.meta.address=removeUnicode(content.split(":")[1].trim());
-              }else if (content.toLowerCase().includes("whatsapp")){
-                const whatsapp=removeUnicode(content.split(":")[1].trim());
-                this.meta.whatsapp=whatsapp;
-                const message=encodeURIComponent('Hi I like to know more info\n');
-                this.meta.whatsappLink=`https://wa.me/${whatsapp}?text=${message} ${window.location.href}`;
-              }else if (content.toLowerCase().includes("email")){
-                this.meta.email=removeUnicode(content.split(":")[1].trim());
-              }else if (content.toLowerCase().includes("facebook")){
-                this.meta.socialMeda.facebook=removeUnicode(content.split('Facebook:')[1].trim());
-              }else if (content.toLowerCase().includes("instagram")){
-                this.meta.socialMeda.instagram=removeUnicode(content.split('Instagram:')[1].trim());
-              }else if (content.toLowerCase().includes("tiktok")){
-                this.meta.socialMeda.tiktok=removeUnicode(content.split('Tiktok:')[1].trim());
-              }
-            })
-
-            localStorage.setItem("social-media",JSON.stringify(this.meta.socialMeda));
-            localStorage.setItem("whatsapp",this.meta.whatsapp);
-          };
-
-        });
-      },
-    };
-  }
 
   const getFooter = ()=>{
 
@@ -440,41 +297,10 @@ woman
       }
     }
   }
-  setTimeout(()=>{
-    var swiperPreview = new Swiper(".mySwiper", {
-      loop: true,
-      spaceBetween: 10,
-      slidesPerView: 5,
-      freeMode: true,
-      watchSlidesProgress: true,
-    });
-    var swiper2 = new Swiper(".mySwiper2", {
-      loop: true,
-      spaceBetween: 10,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      thumbs: {
-        swiper: swiperPreview,
-      },
-    });
 
 
-    var swiper = new Swiper(".new-products", {
-      slidesPerView: 4,
-      spaceBetween: 20,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-    });
-
-  },300);
+</script>
+<script>
   const getProduct=()=>{
     return{
       product:{
@@ -565,30 +391,36 @@ woman
       },
     }
   }
+  setTimeout(()=>{
+    var swiperPreview = new Swiper(".mySwiper", {
+      loop: true,
+      spaceBetween: 10,
+      slidesPerView: 5,
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+    var swiper2 = new Swiper(".mySwiper2", {
+      loop: true,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: swiperPreview,
+      },
+    });
 
-  const getPage=()=>{
-    return{
-      title:"",
-      description:"",
-      init(){
-        const element = document.querySelector(".post-outer");
-        const h3 = element.querySelector(".post-title.entry-title");
-        const title =h3.innerHTML
-        const content=element.querySelector(".post-body.entry-content.float-container");
-        content.querySelectorAll("img").forEach(img => img.remove());
-        this.title=title;
-        this.description =content.innerHTML;
-      }
-    }
-  }
+  },300);
+
 
 </script>
 
 <script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/3704019819-widgets.js"></script>
 <script type='text/javascript'>
-  window['__wavt'] = 'AOuZoY6tLqSfo4I8UKgboZzeQPnWZgdRmw:1733951208472';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d5963326103498819871','//d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html','5963326103498819871');
-  _WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '5963326103498819871', 'title': 'Product Catalog', 'url': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'canonicalUrl': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'homepageUrl': 'https://d-product-catalog.blogspot.com/', 'searchUrl': 'https://d-product-catalog.blogspot.com/search', 'canonicalHomepageUrl': 'https://d-product-catalog.blogspot.com/', 'blogspotFaviconUrl': 'https://d-product-catalog.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Product Catalog - RSS\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/5963326103498819871/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/5117590774691685677/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/64fba25a9e2c60bd', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '5117590774691685677', 'postImageUrl': 'https://gflock.lk/cdn/shop/products/04_db61fe9e-dae4-4864-9374-2e053a5f99af_600x.jpg?v\x3d1692186976', 'pageName': 'One Shoulder Mini Dress', 'pageTitle': 'Product Catalog: One Shoulder Mini Dress', 'metaDescription': 'This is a search description'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'One Shoulder Mini Dress', 'description': 'This is a search description', 'featuredImage': 'https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sNxg3ztKFCG_nkUR9aoGmWBh-Pfsw5RYN4gcF2VRGVx8ld7RYiqTYwZFnE3NGZYwuZoUuPmspfvN5Y7_kRiQ3Zh16PU0KBXnKrAzwR2cJpCpXsvxa5eWMF9rQNZx4JAI5nxn5xNc2p0TKOKktQxixFvZvNjU0suiDXE-UV-is0IXaKtGM', 'url': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 5117590774691685677}}, {'name': 'widgets', 'data': [{'title': 'Blog Posts', 'type': 'Blog', 'sectionId': 'products', 'id': 'Blog1', 'posts': [{'id': '5117590774691685677', 'title': 'One Shoulder Mini Dress', 'featuredImage': 'https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sNxg3ztKFCG_nkUR9aoGmWBh-Pfsw5RYN4gcF2VRGVx8ld7RYiqTYwZFnE3NGZYwuZoUuPmspfvN5Y7_kRiQ3Zh16PU0KBXnKrAzwR2cJpCpXsvxa5eWMF9rQNZx4JAI5nxn5xNc2p0TKOKktQxixFvZvNjU0suiDXE-UV-is0IXaKtGM', 'showInlineAds': false}], 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': 'Labels:'}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Location:'}]}], 'allBylineItems': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': 'Labels:'}, {'name': 'location', 'label': 'Location:'}]}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'productHeader-container', 'id': 'Header2'}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'header-container', 'id': 'Header1'}]}]);
-  _WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'products', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/2385764300-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/1964470060-lightbox_bundle.css'}, 'displayModeFull'));
+  window['__wavt'] = 'AOuZoY5YnY9jCK3HOBvaCRr9-DHw_AQM3A:1734033192561';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d5963326103498819871','//d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html','5963326103498819871');
+  _WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '5963326103498819871', 'title': 'Product Catalog', 'url': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'canonicalUrl': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'homepageUrl': 'https://d-product-catalog.blogspot.com/', 'searchUrl': 'https://d-product-catalog.blogspot.com/search', 'canonicalHomepageUrl': 'https://d-product-catalog.blogspot.com/', 'blogspotFaviconUrl': 'https://d-product-catalog.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Product Catalog - RSS\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/5963326103498819871/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Product Catalog - Atom\x22 href\x3d\x22https://d-product-catalog.blogspot.com/feeds/5117590774691685677/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/13847555b6acda6c', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '5117590774691685677', 'postImageUrl': 'https://gflock.lk/cdn/shop/products/04_db61fe9e-dae4-4864-9374-2e053a5f99af_600x.jpg?v\x3d1692186976', 'pageName': 'One Shoulder Mini Dress', 'pageTitle': 'Product Catalog: One Shoulder Mini Dress', 'metaDescription': 'This is a search description'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'One Shoulder Mini Dress', 'description': 'This is a search description', 'featuredImage': 'https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vcocKTASm-_CaJWYy-DT91Q3hNAqOQMC6Hys2JSesy2kz2RMNyQC7qYB9GCmdUNe8FffPP08XwspmgdOoe0k-zHBv5hKIYxSaCsdRlJIrx14obODbS4F5S1k2DfB4gVp3gLT-PsPpQ31oShv5V79cB4IbiY4gVKbwFKOlxhucD7qfcIyY', 'url': 'https://d-product-catalog.blogspot.com/2024/12/one-shoulder-mini-dress.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 5117590774691685677}}, {'name': 'widgets', 'data': [{'title': 'Blog Posts', 'type': 'Blog', 'sectionId': 'products', 'id': 'Blog1', 'posts': [{'id': '5117590774691685677', 'title': 'One Shoulder Mini Dress', 'featuredImage': 'https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vcocKTASm-_CaJWYy-DT91Q3hNAqOQMC6Hys2JSesy2kz2RMNyQC7qYB9GCmdUNe8FffPP08XwspmgdOoe0k-zHBv5hKIYxSaCsdRlJIrx14obODbS4F5S1k2DfB4gVp3gLT-PsPpQ31oShv5V79cB4IbiY4gVKbwFKOlxhucD7qfcIyY', 'showInlineAds': false}], 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': 'Labels:'}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Location:'}]}], 'allBylineItems': [{'name': 'author', 'label': 'Posted by'}, {'name': 'timestamp', 'label': 'at'}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': 'Labels:'}, {'name': 'location', 'label': 'Location:'}]}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'productHeader-container', 'id': 'Header2'}, {'title': 'Product Catalog (Header)', 'type': 'Header', 'sectionId': 'header-container', 'id': 'Header1'}]}]);
+  _WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'products', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/2019811046-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/1964470060-lightbox_bundle.css'}, 'displayModeFull'));
   _WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header2', 'productHeader-container', document.getElementById('Header2'), {}, 'displayModeFull'));
   _WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header-container', document.getElementById('Header1'), {}, 'displayModeFull'));
 </script>
