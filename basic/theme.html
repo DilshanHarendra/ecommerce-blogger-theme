@@ -737,6 +737,7 @@
 
         <aside class='fixed inset-y-0 z-20 flex-shrink-0 w-full mt-16 pt-5 overflow-y-auto bg-gray-900 md:hidden z-50 h-screen' x-data='' x-show='$store.navBar.isHeaderOpen' x-transition:enter='transition ease-in-out duration-150' x-transition:enter-end='opacity-100' x-transition:enter-start='opacity-0 transform -translate-x-20' x-transition:leave='transition ease-in-out duration-150' x-transition:leave-end='opacity-0 transform -translate-x-20' x-transition:leave-start='opacity-100'>
           <div class='flex space-y-4  flex-col px-6'>
+            <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/'>Home</a>
             <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/terms-and-conditions.html'>Terms</a>
             <a class='text-lg text-white hover:opacity-75 active:text-blue-600' href='/p/about-us.html'>About Us</a>
           </div>
@@ -910,7 +911,7 @@
               </select>
             </div>
           </div>
-          <div class='grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
+          <div class='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             <template x-for='product in products'>
               <a :href='product.link' class='border rounded-md bg-white shadow-md hover:scale-105 duration-300'>
                 <img :alt='product.title' :src='product.image' class='w-full object-cover h-72 rounded-t-md'/>
@@ -1007,7 +1008,7 @@
 <b:if cond='!data:view.isSearch'>
   <!-- Footer -->
   <footer class='bg-gray-900 py-8' x-data='getFooter()'>
-    <div class='container mx-auto px-6 text-center text-gray-400 flex items-start justify-between'>
+    <div class='container mx-auto px-6 text-center text-gray-400 flex md:flex-row flex-col space-y-6 md:space-y-0 items-start justify-between'>
       <div>
         <p class='font-bold text-lg tracking-wider text-gray-200'>Follow us on</p>
         <div class='flex space-x-4 justify-start w-fit mt-2'>
@@ -1036,7 +1037,7 @@
 
         </div>
       </div>
-      <p>2024 Dilshan. All Rights Reserved.</p>
+      <p class='md:text-left text-center w-full md:w-fit'>2024 Dilshan. All Rights Reserved.</p>
     </div>
   </footer>
 </b:if>
